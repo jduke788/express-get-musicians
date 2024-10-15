@@ -5,7 +5,7 @@ const { db } = require("../db/connection")
 
 const port = 3000;
 
-//TODO: Create a GET /musicians route to return all musicians 
+app.use(express.json())
 
 app.get("/musicians",  async (req, res) => {
     const musicians = await Musician.findAll()
@@ -13,7 +13,12 @@ app.get("/musicians",  async (req, res) => {
 });
 
 
-
+app.get("/musicians/:id", async (req, res) => {
+        const parameter = req.params.id
+        const musician = await Musician.findByPk(parameter)
+        res.json(musician)
+        }
+    )
 
 
 
